@@ -12,20 +12,18 @@ char ** parse_args( char * line ) {
   while (seg) {
     //set the slot in parsed as the returned string segment by strsep
     parsed[index] = strsep(&seg, " ");
-    //    printf("%s\n", parsed[index]);
-    //    printf("next: %s\n", seg);
+    printf("adding: %s\n", parsed[index]);
+    printf("left: %s\n", seg);
     index++;
   }
   //if all slots have args, last should be NULL
-  parsed[5] = NULL;
   return parsed;
 }
 
 int main( int argc, char * argv[]) {
-  char args1[500] = "ls -a -l";
-  char ** command = parse_args(args1);
+  char args[500] = "ls -a -l";
+  char ** command = parse_args(args);
   execvp(command[0], command);
-  //remember to free alloc-ed mem
-  free(command);
+  //memory should be freed after other process takes over?
   
 }
